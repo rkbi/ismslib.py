@@ -1,10 +1,10 @@
 # ismslib
-A very simple and easy to use Python 3 library for integrating SSLWireless SMS API.
+Very simple and easy to use Python 3 library for integrating SSLWireless SMS API.
 
 
 ## Installation
 ```shell script
-python3 -m pip install ismslib
+pipenv install ismslib
 ```
 
 
@@ -12,6 +12,7 @@ python3 -m pip install ismslib
 ```python
 from ismslib import ISMS
 
+# Contact with SSLWireless Key Account Manager for these credentials
 config = {
     "username": '<user>',
     "password": '<pass>',
@@ -22,6 +23,9 @@ response = ISMS.config(config)\
                 .body("আসসালামু আলাইকুম").bn()\
                 .recipient(['88018XXXXXXXX', '88019XXXXXXXX'])\
                 .send()
+
+print(response) if response['error'] else print('success')
+
 ```
 
 

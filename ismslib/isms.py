@@ -56,7 +56,7 @@ class ISMS:
         login = reply.get('LOGIN')
         if login == 'FAIL':
             self.response['error'] = True
-            self.response['msg'] = 'Login FAILED. Please check your username and password.'
+            self.response['msg'] = 'Login FAILED. Check username and password. Also make sure this server IP is whitelisted at SSLWireless end.'
 
         parameter = reply.get('PARAMETER')
         if parameter != 'OK':
