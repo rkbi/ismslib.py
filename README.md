@@ -1,10 +1,15 @@
-# ismslib
-Very simple and easy to use Python 3 library for integrating SSLWireless SMS API.
+# [ismslib](https://pypi.org/project/ismslib/)
+#### Very simple and easy to use Python 3 library for integrating SSLWireless SMS API.
 
 
 ## Installation
+#### using virtual environment (pipenv)
 ```shell script
 pipenv install ismslib
+```
+#### using pip globally
+```shell script
+python3 -m pip install ismslib
 ```
 
 
@@ -19,9 +24,9 @@ config = {
     "sid": '<SID>',
 }
 
-response = ISMS.config(config)\
-                .body("আসসালামু আলাইকুম").bn()\
-                .recipient(['88018XXXXXXXX', '88019XXXXXXXX'])\
+response = ISMS.set_config(config)\
+                .set_body("আসসালামু আলাইকুম").make_unicode()\
+                .set_recipient(['88018XXXXXXXX', '88019XXXXXXXX'])\
                 .send()
 
 print(response) if response['error'] else print('success')
@@ -35,7 +40,7 @@ print(response) if response['error'] else print('success')
  from ismslib import ISMS
 ```
 ### 2. Set Credentials
-Create a dictionary with user credentials obtained from SSLWireless. It can optionally set in a separate config.py file and imported here.
+Create a dictionary with user credentials obtained from SSLWireless.
 ```python
 config = {
     "username": '',  # Please add your username provided by SSLWireless
@@ -44,27 +49,27 @@ config = {
 }
 ```
 ### 3. Set data
-##### Call needed methods with appropriate data
+##### Call needed methods with valid data
 ```python
-ISMS.config(config) # Set config values
-ISMS.body("আসসালামু আলাইকুম") #Set SMS body text, Can be English or Unicode Bangla
-ISMS.bn() # Call only if the body text is in Bangla, otherwise omit
-ISMS.recipient(['88018XXXXXXXX', '88019XXXXXXXX']) # can be a single valid mobile number as string or multiple numbers as an string array
-ISMS.debug() # Prints useful information on console. Only useful when debugging, DO NOT USE IN PRODUCTION
+ISMS.set_config(config) # Set config values
+ISMS.set_body("আসসালামু আলাইকুম") #Set SMS body text, Can be English or Unicode Bangla
+ISMS.make_unicode() # Use for Bangla SMS, otherwise is not needed
+ISMS.set_recipient(['88018XXXXXXXX', '88019XXXXXXXX']) # list of mobile numbers to send to
+ISMS.set_debug(True) # __DO NOT USE IN PRODUCTION__. Prints useful information on console.
 response = ISMS.send() # Finally send SMS.
 ```
 
-##### Methods can be chained together optionally
+##### optionally, methods can be chained together 
 ```python
-response = ISMS.config(config)\
-                .body("আসসালামু আলাইকুম").bn()\
-                .recipient(['88018XXXXXXXX', '88019XXXXXXXX'])\
-                .debug()\
+response = ISMS.set_config(config)\
+                .set_body("আসসালামু আলাইকুম").make_unicode()\
+                .set_recipient(['88018XXXXXXXX', '88019XXXXXXXX'])\
+                .set_debug()\
                 .send()
 ```
 
 ### 4. Check the returned response
-##### We can print out the response in console for fun or use otherwise for profit
+We can print out the response in console
 ```python
 print(response) if response['error'] else print('success')
 ```

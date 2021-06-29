@@ -12,7 +12,6 @@ class ISMS:
        """
 
     debug = False
-    config = []
     username = ''
     password = ''
     sid = ''
@@ -21,22 +20,21 @@ class ISMS:
     msisdn = ''
     response = {'error': False, 'msg': '', 'json': ''}
 
-    def config(self, config):
-        self.config = config
-        self.username = config['username']
-        self.password = config['password']
-        self.sid = config['sid']
+    def set_config(self, c):
+        self.username = c['username']
+        self.password = c['password']
+        self.sid = c['sid']
         return self
 
-    def body(self, body):
-        self.body = body
+    def set_body(self, b):
+        self.body = b
         return self
 
-    def bn(self):
+    def make_unicode(self):
         self.body = binascii.hexlify(self.body.encode('utf-16-be')).upper()
         return self
 
-    def recipient(self, msisdn):
+    def set_recipient(self, msisdn):
         self.recipient = msisdn
         return self
 
@@ -90,8 +88,8 @@ class ISMS:
         self.response['json'] = json.dumps(r)
         self.__handle_error(r.get('REPLY'))
 
-    def debug(self):
-        self.debug = True
+    def set_debug(self, d):
+        self.debug = d
         return self
 
     def send(self):

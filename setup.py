@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='ismslib',
-    version='2.0',
+    version='2.1',
     packages=['ismslib'],
     url='https://github.com/rkbi/ismslib.py',
     license='GPLv3',
